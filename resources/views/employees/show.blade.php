@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container mt-4">
-        <div class="card shadow-sm">
+        <div class="">
             <div
                 class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
                 <h4 class="fw-bold">{{ $employee->name }} — Production Capability</h4>
@@ -21,11 +21,11 @@
                             <ul class="list-group">
                                 @foreach ($employee->products as $product)
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <span class="badge bg-success">{{ $product->code }}</span>
+                                        {{-- <span class="badge bg-success">{{ $product->code }}</span> --}}
 
                                         <div>
-                                            <strong>{{ $product->name }}</strong><br>
-                                            <small class="text-muted">{{ $product->description }}</small>
+                                            <strong> {{ $product->code }} : {{ $product->name }}</strong><br>
+                                            {{-- <small class="text-muted">{{ $product->description }}</small> --}}
                                         </div>
                                     </li>
                                 @endforeach
@@ -39,11 +39,6 @@
                 </div>
             </div>
 
-            <div class="card-footer text-end">
-                <a href="{{ route('employees.index') }}" class="btn btn-secondary">
-                    ← Back to Employee List
-                </a>
-            </div>
         </div>
     </div>
 @endsection
