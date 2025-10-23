@@ -24,11 +24,11 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Email</th>
+                        {{-- <th>Email</th> --}}
                         <th>Position</th>
                         <th>Department</th>
-                        <th>Phone</th>
-                        <th>Products</th>
+                        {{-- <th>Phone</th> --}}
+                        {{-- <th>Products</th> --}}
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -37,15 +37,15 @@
                         <tr onclick="window.location='{{ route('employees.show', $employee->id) }}'" style="cursor:pointer;">
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $employee->name }}</td>
-                            <td>{{ $employee->email }}</td>
+                            {{-- <td>{{ $employee->email }}</td> --}}
                             <td>{{ $employee->position }}</td>
                             <td>{{ $employee->department }}</td>
-                            <td>{{ $employee->phone }}</td>
-                            <td>
+                            {{-- <td>{{ $employee->phone }}</td> --}}
+                            {{-- <td>
                                 @foreach($employee->products as $product)
                                     <span class="badge bg-primary">{{ $product->name }}</span>
                                 @endforeach
-                            </td>
+                            </td> --}}
                             <td class="text-center">
                                 <a href="{{ route('employees.edit', $employee->id) }}" class="btn btn-sm btn-warning mb-1">Edit</a>
                                 <form action="{{ route('employees.destroy', $employee->id) }}" method="POST" class="d-inline">

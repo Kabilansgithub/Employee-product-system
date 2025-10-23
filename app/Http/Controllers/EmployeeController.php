@@ -61,8 +61,9 @@ class EmployeeController extends Controller
     }
 
     // Show single employee
-    public function show(Employee $employee)
+    public function show( $id )
     {
+        $employee = Employee::with('products')->findOrFail($id);
         return view('employees.show', compact('employee'));
     }
 

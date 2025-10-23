@@ -25,7 +25,7 @@
                         <th>#</th>
                         <th>Code</th>
                         <th>Name</th>
-                        <th>Description</th>
+                        {{-- <th>Description</th> --}}
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -35,7 +35,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $product->code }}</td>
                             <td>{{ $product->name }}</td>
-                            <td>{{ $product->description }}</td>
+                            {{-- <td>{{ $product->description }}</td> --}}
                             <td class="text-center">
                                 <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-warning mb-1 ">Edit</a>
                                 <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline">
