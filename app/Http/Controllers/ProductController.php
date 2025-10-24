@@ -35,6 +35,14 @@ class ProductController extends Controller
     // Store new product
     public function store(Request $request)
     {
+        $employees = Employee::whereDoesntHave('products', function($q) use ($id) {
+    $q->where('products.id', $id);
+})->when($search, function ($query, $search) {
+    $query->where('name', 'like', "%{$search}%")
+          ->orWhere('email', 'like', "%{$search}%")
+          ->orWhere('department', 'like', "%{$search}%");
+})->paginate(10);
+
         $request->validate([
             'code' => 'required|unique:products,code',
             'name' => 'required',
@@ -50,20 +58,27 @@ class ProductController extends Controller
     }
 
     // Show single product
-    public function show($id)
+public function show($id, Request $request)
 {
     $product = Product::with('employees')->findOrFail($id);
 
-    // Search functionality
-    $search = request('search');
-    $employees = Employee::when($search, function ($query, $search) {
+    // Search query
+    $search = $request->input('search');
+
+    // Get only employees NOT assigned to this product
+    $employees = Employee::whereDoesntHave('products', function ($q) use ($id) {
+        $q->where('products.id', $id);
+    })
+    ->when($search, function ($query, $search) {
         $query->where('name', 'like', "%{$search}%")
               ->orWhere('email', 'like', "%{$search}%")
               ->orWhere('department', 'like', "%{$search}%");
-    })->paginate(10);
+    })
+    ->paginate(10);
 
     return view('products.show', compact('product', 'employees', 'search'));
 }
+
 
 
     // Show edit form
