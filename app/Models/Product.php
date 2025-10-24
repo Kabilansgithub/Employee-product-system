@@ -12,7 +12,15 @@ class Product extends Model
     protected $fillable = ['code', 'name', 'description'];
 
     public function employees()
-    {
-        return $this->belongsToMany(Employee::class, 'employee_product');
-    }
+{
+    return $this->belongsToMany(Employee::class)
+                ->withPivot('capable_from')
+                ->withTimestamps();
+}
+
+
+    // public function employees()
+    // {
+    //     return $this->belongsToMany(Employee::class, 'employee_product');
+    // }
 }

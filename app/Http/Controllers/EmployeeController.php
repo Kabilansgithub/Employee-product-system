@@ -107,4 +107,21 @@ class EmployeeController extends Controller
         $employee->delete();
         return redirect()->route('employees.index')->with('success','Employee deleted successfully!');
     }
+
+    public function attachEmployee(Request $request, $productId, $employeeId)
+{
+    $request->validate([
+        'capable_from' => 'required|date',
+    ]);
+
+    $product = Product::findOrFail($productId);
+
+    // Attach or update capability date
+    $product->employees()->syncWithoutDetaching([
+        $employeeId => ['capable_from' => $request->capable_from],
+    ]);
+
+    return back()->with('success', 'Employee capability added successfully.');
+}
+
 }

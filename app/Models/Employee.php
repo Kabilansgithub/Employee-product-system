@@ -15,9 +15,17 @@ class Employee extends Authenticatable
     ];
 
     protected $hidden = ['password'];
-
+    
     public function products()
-    {
-        return $this->belongsToMany(Product::class, 'employee_product');
-    }
+{
+    return $this->belongsToMany(Product::class)
+                ->withPivot('capable_from')
+                ->withTimestamps();
+}
+
+
+    // public function products()
+    // {
+    //     return $this->belongsToMany(Product::class, 'employee_product');
+    // }
 }
